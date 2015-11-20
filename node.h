@@ -46,7 +46,7 @@ template <class T>
 Node<T>::Node()
 {
     left = NULL;
-    right =NULL;
+    right=NULL;
     height =0;
 }
 template <class T>

@@ -2,10 +2,12 @@
 #define AVLTREE
 #include "node.h"
 #include <iostream>
+//#include "container.h"
 template <class T>
 class AvlTree
 {
    private: Node<T>* root;
+            //T key;
             void insert(T,Node<T>*&);
             void rotatecase1(Node<T>* &);
             void rotatecase2(Node<T>* &);
@@ -19,11 +21,46 @@ class AvlTree
            void delet();
            int height(Node<T> *);
            int max(int,int);
+            T find(T);
+            T find(Node<T>*,T );
            void inorder(Node<T>*);
            void inorder();
 
 
 };
+template <class T>
+T AvlTree<T>::find(T t)
+{
+    return find(root,t);
+   // return key;
+    //std::cout<<"called";
+}
+template <class T>
+T AvlTree<T>::find(Node<T>* n,T t)
+{
+
+    if(t==n->get())
+    {
+        std::cout<<"finded "<<n->get()<<std::endl;
+       //key = n->get();
+        return n->get();
+    }
+    else
+    {
+        if(t>n->get())
+        {    if(n->getright()!=NULL)
+              { return find(n->getright(),t);}
+              else return t;
+        }
+           else if(t<n->get())
+            {
+                if(n->getleft()!=NULL)
+                  {  return find(n->getleft(),t);}
+               else return t;
+            }
+
+    }
+}
 template <class T>
 void AvlTree<T>::inorder()
 {
@@ -35,12 +72,12 @@ void AvlTree<T>::inorder(Node<T> * node)
 {
     if(node->getleft()==NULL&&node->getright()==NULL)
     {
-        std::cout<<node->get()<<" ";
+        std::cout<<node->get()<<" "<<std::endl;
     }
     else
     {
         if(node->getleft()!=NULL)inorder(node->getleft());
-        std::cout<<node->get()<<" ";
+        std::cout<<node->get()<<" "<<std::endl;
         if(node->getright()!=NULL)inorder(node->getright());
     }
 }
